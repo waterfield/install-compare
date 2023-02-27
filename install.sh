@@ -14,13 +14,7 @@ rm -rf $HOME/tmp/compare
 git clone git@github.com:waterfield/compare.git
 cd compare
 sudo docker build . -t compare
-echo <<'END' > $HOME/bin/compare
-if [[ $1 == "update" ]]; then
-  curl https://raw.githubusercontent.com/waterfield/install-compare/main/install.sh | bash
-else
-  docker run --rm -u $(id -u ${USER}):$(id -g ${USER}) -v `pwd`:/app/user compare $*
-fi
-END
+echo "if [[ \$1 == \"update\" ]]; then\ncurl https://raw.githubusercontent.com/waterfield/install-compare/main/install.sh | bash\nelse\ndocker run --rm -u \$(id -u \${USER}):\$(id -g \${USER}) -v \`pwd\`:/app/user compare \$*\nfi" > $HOME/compare
 chmod +x $HOME/bin/compare
 cd $HOME
 rm -rf $HOME/tmp/compare
