@@ -14,7 +14,7 @@ rm -rf $HOME/tmp/compare
 git clone git@github.com:waterfield/compare.git
 cd compare
 sudo docker build . -t compare
-echo "docker run -v \`pwd\`:/app/user compare \$*" > $HOME/bin/compare
+echo "docker run --rm -u \$(id -u \${USER}):\$(id -g \${USER}) -v \`pwd\`:/app/user compare \$*" > $HOME/bin/compare
 chmod +x $HOME/bin/compare
 cd $HOME
 rm -rf $HOME/tmp/compare
